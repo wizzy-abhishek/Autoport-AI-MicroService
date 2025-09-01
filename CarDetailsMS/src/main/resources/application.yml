@@ -1,0 +1,27 @@
+server:
+  port: 8090
+
+spring:
+  cloud:
+    azure:
+      storage:
+        blob:
+          account-name: ${AZURE_STORAGE}
+
+  datasource:
+    url: ${POSTGRES_URI_CAR_DETAIL}
+    username: ${POSTGRES_USERNAME_CAR_DETAIL}
+    password: ${POSTGRES_PASSWORD_CAR_DETAIL}
+    driver-class-name: org.postgresql.Driver
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+containerName: ${containerName}
