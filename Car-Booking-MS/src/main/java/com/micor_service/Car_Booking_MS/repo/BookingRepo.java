@@ -1,6 +1,6 @@
-package repo;
+package com.micor_service.Car_Booking_MS.repo;
 
-import com.agentiAICarBooking.entity.Booking;
+import com.micor_service.Car_Booking_MS.entity.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

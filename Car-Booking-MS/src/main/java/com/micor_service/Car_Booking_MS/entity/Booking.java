@@ -1,4 +1,4 @@
-package entity;
+package com.micor_service.Car_Booking_MS.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

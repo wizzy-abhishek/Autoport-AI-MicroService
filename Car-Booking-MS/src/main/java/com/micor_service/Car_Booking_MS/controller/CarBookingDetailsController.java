@@ -1,8 +1,8 @@
 package com.micor_service.Car_Booking_MS.controller;
 
-import com.agentiAICarBooking.dto.BookingDTO;
-import com.agentiAICarBooking.dto.SearchDTO;
-import com.agentiAICarBooking.services.BookingService;
+import com.micor_service.Car_Booking_MS.dto.BookingDTO;
+import com.micor_service.Car_Booking_MS.dto.SearchDTO;
+import com.micor_service.Car_Booking_MS.services.BookingService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
