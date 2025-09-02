@@ -31,17 +31,19 @@ public class Car {
     @LastModifiedDate
     private LocalDateTime lastModification;
 
-    @OneToMany(mappedBy = "car",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL)
-    private List<CarImages> carImages;
+    @Column()
+    private List<String> carImageURl;
 
     public Car() {
     }
 
-    public Car(String modelName, String description, String price) {
+    public Car(String modelName,
+               String description,
+               String price) {
+
         this.modelName = modelName;
         this.description = description;
         this.price = price;
+
     }
 }

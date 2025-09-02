@@ -14,6 +14,10 @@ spring:
     password: ${POSTGRES_PASSWORD_CAR_DETAIL}
     driver-class-name: org.postgresql.Driver
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+
 eureka:
   instance:
     prefer-ip-address: true
