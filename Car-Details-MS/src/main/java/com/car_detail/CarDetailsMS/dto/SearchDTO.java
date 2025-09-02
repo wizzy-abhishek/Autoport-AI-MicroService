@@ -1,4 +1,5 @@
 package com.car_detail.CarDetailsMS.dto;
 
-public record SearchDTO() {
+public record SearchDTO(String modelName,
+                        String description) {
 }
