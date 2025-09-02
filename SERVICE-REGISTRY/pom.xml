@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.service_registry</groupId>
-	<artifactId>sr</artifactId>
+	<artifactId>SERVICE-REGISTRY</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sr</name>
+	<name>SERVICE-REGISTRY</name>
 	<description>Service registry</description>
 	<url/>
 	<licenses>

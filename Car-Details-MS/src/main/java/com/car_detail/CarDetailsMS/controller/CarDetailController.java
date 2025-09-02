@@ -2,7 +2,7 @@ package com.car_detail.CarDetailsMS.controller;
 
 
 import com.car_detail.CarDetailsMS.dto.CarDTO;
-import com.car_detail.CarDetailsMS.service.CarDetailService;
+import com.car_detail.CarDetailsMS.service.CarAdditionService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/car-detail")
 public class CarDetailController {
 
-    private final CarDetailService carDetailService;
+    private final CarAdditionService carDetailService;
 
-    public CarDetailController(CarDetailService carDetailService) {
+    public CarDetailController(CarAdditionService carDetailService) {
         this.carDetailService = carDetailService;
     }
 

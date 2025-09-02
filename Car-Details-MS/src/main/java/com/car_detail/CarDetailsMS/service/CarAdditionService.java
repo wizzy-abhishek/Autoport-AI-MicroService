@@ -14,12 +14,12 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class CarDetailService {
+public class CarAdditionService {
 
     private final CarRepo carRepo;
     private final MediaCloudService mediaCloudSaveService;
 
-    public CarDetailService(CarRepo carRepo, MediaCloudService mediaCloudSaveService) {
+    public CarAdditionService(CarRepo carRepo, MediaCloudService mediaCloudSaveService) {
         this.carRepo = carRepo;
         this.mediaCloudSaveService = mediaCloudSaveService;
     }

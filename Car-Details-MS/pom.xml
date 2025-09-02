@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.car_detail</groupId>
-	<artifactId>CarDetailsMS</artifactId>
+	<artifactId>Car-Details-MS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CarDetailsMS</name>
+	<name>Car-Details-MS</name>
 	<description>CarDetailsMS</description>
 	<url/>
 	<licenses>
