@@ -2,6 +2,7 @@ package com.car_detail.CarDetailsMS.controller;
 
 import com.car_detail.CarDetailsMS.dto.CarDTO;
 import com.car_detail.CarDetailsMS.dto.SearchDTO;
+import com.car_detail.CarDetailsMS.service.GetCarService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/public")
 public class PublicCarShowcaseController {
 
+    private final GetCarService getCarService;
+
+    public PublicCarShowcaseController(GetCarService getCarService) {
+        this.getCarService = getCarService;
+    }
+
     @PostMapping("/get-cars")
     ResponseEntity<Page<CarDTO>> getAllCars(@RequestBody SearchDTO searchDTO,
                                             @RequestParam(defaultValue = "0") int pageNumber,
@@ -18,6 +25,11 @@ public class PublicCarShowcaseController {
                                             @RequestParam(defaultValue = "true") boolean ascending){
 
         Sort sort =  ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-
+        return ResponseEntity
+                .ok()
+                .body(getCarService
+                        .getCars(searchDTO,
+                                pageNumber,
+                                sort));
     }
 }
