@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.user_cart</groupId>
-	<artifactId>USER-CART-MS</artifactId>
+	<artifactId>USER-ORDER-MS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>USER-CART-MS</name>
+	<name>USER-ORDER-MS</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
