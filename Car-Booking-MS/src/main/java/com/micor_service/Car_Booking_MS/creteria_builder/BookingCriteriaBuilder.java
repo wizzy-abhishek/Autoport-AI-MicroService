@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -21,12 +22,17 @@ public class BookingCriteriaBuilder {
         this.entityManager = entityManager;
     }
 
-    public List<Booking> bookingsFiltering(SearchDTO searchDTO) {
+    public List<Booking> bookingsFiltering(SearchDTO searchDTO, String sorting, boolean ascending) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Booking> query = cb.createQuery(Booking.class);
         Root<Booking> root = query.from(Booking.class);
 
         List<Predicate> predicates = new ArrayList<>();
+
+        if (searchDTO.brandModel() != null && !searchDTO.brandModel().isBlank()) {
+            predicates.add(cb.like(cb.lower(root.get("brand_name")),
+                    "%" + searchDTO.brandModel().toLowerCase() + "%"));
+        }
 
         if (searchDTO.buyerName() != null && !searchDTO.buyerName().isBlank()) {
             predicates.add(cb.like(cb.lower(root.get("buyerName")),
@@ -54,6 +60,11 @@ public class BookingCriteriaBuilder {
         }
 
         query.where(cb.and(predicates.toArray(new Predicate[0])));
+        if(ascending){
+            query.orderBy(cb.asc(root.get(sorting)));
+        }else{
+            query.orderBy(cb.desc(root.get(sorting)));
+        }
 
         return entityManager.createQuery(query).getResultList();
     }

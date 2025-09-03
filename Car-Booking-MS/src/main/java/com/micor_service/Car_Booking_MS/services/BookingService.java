@@ -20,37 +20,36 @@ public class BookingService {
 
     private final static int PAGE_SIZE = 10 ;
 
-    private final BookingRepo bookingRepo;
     private final BookingCriteriaBuilder bookingCriteriaBuilder;
 
-    public BookingService(BookingRepo bookingRepo, BookingCriteriaBuilder bookingCriteriaBuilder) {
-        this.bookingRepo = bookingRepo;
+    public BookingService(BookingCriteriaBuilder bookingCriteriaBuilder) {
         this.bookingCriteriaBuilder = bookingCriteriaBuilder;
     }
 
     public Page<BookingDTO> getBookings(SearchDTO searchDTO,
                                         int pageNumber,
-                                        Sort sortBy,
+                                        String  sortBy,
+                                        boolean ascending,
                                         HttpServletRequest httpServletRequest){
 
-        PageRequest pageRequest = PageRequest.of(pageNumber, PAGE_SIZE, sortBy);
-
-        List<Booking> bookings = bookingCriteriaBuilder.bookingsFiltering(searchDTO);
+        List<Booking> bookings = bookingCriteriaBuilder.bookingsFiltering(searchDTO, sortBy, ascending);
 
         List<BookingDTO> collect = bookings
                 .stream()
                 .map(BookingService::getBookingDTO)
                 .toList();
+
+        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        PageRequest pageRequest = PageRequest.of(pageNumber, PAGE_SIZE, sort);
         
         return new PageImpl<>(collect, pageRequest, collect.size());
     }
 
     private static BookingDTO getBookingDTO(Booking booking){
-        return new BookingDTO(booking.getModelName(),
+        return new BookingDTO(booking.getBrand_name()+ " " + booking.getModelName(),
                 booking.getBuyerName(),
                 booking.getBuyerEmail(),
-                String.valueOf(booking.getCurrencySymbol() + "" + booking.getPrice()),
-                String.valueOf(booking.getPurchaseDate())
-                );
+                booking.getCurrencySymbol() + "" + booking.getPrice(),
+                String.valueOf(booking.getPurchaseDate()));
     }
 }

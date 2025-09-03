@@ -23,9 +23,17 @@ public class CarBookingDetailsController {
     ResponseEntity<Page<BookingDTO>> getBookings(@RequestBody SearchDTO searchDTO,
                                                  @RequestParam(defaultValue = "0") int pageNumber,
                                                  @RequestParam(defaultValue = "purchaseDate") String sortBy,
-                                                 @RequestParam(defaultValue = "true") boolean ascending,
+                                                 @RequestParam(defaultValue = "false") boolean ascending,
                                                  HttpServletRequest httpServletRequest){
-        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        return ResponseEntity.ok().body(bookingService.getBookings(searchDTO, pageNumber, sort, httpServletRequest));
+
+
+        return ResponseEntity.ok()
+                .body(bookingService
+                        .getBookings(searchDTO,
+                                pageNumber,
+                                sortBy,
+                                ascending,
+                                httpServletRequest));
+
     }
 }

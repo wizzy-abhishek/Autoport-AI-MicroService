@@ -20,6 +20,14 @@ public class Booking {
     private String id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private CarBrands brand_name;
+
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime purchaseDate;
+
+    @Column(nullable = false)
     private String modelName;
 
     @Column(nullable = false)
@@ -37,17 +45,15 @@ public class Booking {
     @Column
     private String userDescription;
 
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime purchaseDate;
-
-    public Booking(String modelName,
+    public Booking(CarBrands carBrands,
+                   String modelName,
                    String buyerName,
                    String buyerEmail,
                    BigDecimal price,
                    char currencySymbol,
                    String userDescription) {
 
+        this.brand_name = carBrands;
         this.modelName = modelName;
         this.buyerName = buyerName;
         this.buyerEmail = buyerEmail;
@@ -55,5 +61,6 @@ public class Booking {
         this.currencySymbol = currencySymbol;
         this.purchaseDate = LocalDateTime.now();
         this.userDescription = userDescription;
+
     }
 }
