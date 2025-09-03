@@ -37,6 +37,14 @@ public class GetCarFilteredRepo {
                                     "%" + searchDTO.modelName().toLowerCase() + "%"));
         }
 
+        if (searchDTO.brand() != null && !searchDTO.brand().isBlank()){
+            predicates
+                    .add(criteriaBuilder
+                            .like(criteriaBuilder
+                                            .lower(root.get("carBrand")),
+                                    "%" + searchDTO.brand().toLowerCase() + "%"));
+        }
+
         if (searchDTO.description() != null && !searchDTO.description().isBlank()){
             predicates
                     .add(criteriaBuilder

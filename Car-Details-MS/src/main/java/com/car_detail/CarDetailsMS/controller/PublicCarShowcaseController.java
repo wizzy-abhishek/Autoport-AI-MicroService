@@ -18,10 +18,10 @@ public class PublicCarShowcaseController {
         this.getCarService = getCarService;
     }
 
-    @PostMapping("/get-cars")
+    @PostMapping("/get-car")
     ResponseEntity<Page<CarDTO>> getAllCars(@RequestBody SearchDTO searchDTO,
                                             @RequestParam(defaultValue = "0") int pageNumber,
-                                            @RequestParam(defaultValue = "") String sortBy,
+                                            @RequestParam(defaultValue = "modelName") String sortBy,
                                             @RequestParam(defaultValue = "true") boolean ascending){
 
         Sort sort =  ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
@@ -32,4 +32,21 @@ public class PublicCarShowcaseController {
                                 pageNumber,
                                 sort));
     }
+
+    @GetMapping("/get-car/{model-name}")
+    ResponseEntity<Page<CarDTO>> getCarByName(@PathVariable(value = "model-name") String modelName,
+                                                    @RequestParam(defaultValue = "0") int pageNumber,
+                                                    @RequestParam(defaultValue = "modelName") String sortBy,
+                                                    @RequestParam(defaultValue = "true") boolean ascending) {
+
+        Sort sort =  ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+
+        return ResponseEntity
+                .ok()
+                .body(getCarService
+                        .getCars(new SearchDTO(modelName, null,null),
+                                pageNumber,
+                                sort));
+    }
+
 }

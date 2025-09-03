@@ -2,7 +2,6 @@ package com.car_detail.CarDetailsMS.enitity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -12,17 +11,20 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Setter
 @EntityListeners(AuditingEntityListener.class)
 public class Car {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true,
+            nullable = false)
     private String modelName;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private CarBrands carBrand;
 
     private String description;
 
@@ -31,19 +33,19 @@ public class Car {
     @LastModifiedDate
     private LocalDateTime lastModification;
 
-    @Column()
-    private List<String> carImageURl;
+    @OneToMany(mappedBy = "car",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    private List<CarImages> carImages;
 
     public Car() {
     }
 
-    public Car(String modelName,
-               String description,
-               String price) {
-
+    public Car(String modelName, CarBrands carBrands,
+               String description, String price) {
+        this.carBrand = carBrands;
         this.modelName = modelName;
         this.description = description;
         this.price = price;
-
     }
 }

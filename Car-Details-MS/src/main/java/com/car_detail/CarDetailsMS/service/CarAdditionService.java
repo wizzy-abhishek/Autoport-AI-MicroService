@@ -2,6 +2,7 @@ package com.car_detail.CarDetailsMS.service;
 
 import com.car_detail.CarDetailsMS.dto.CarDTO;
 import com.car_detail.CarDetailsMS.enitity.Car;
+import com.car_detail.CarDetailsMS.enitity.CarBrands;
 import com.car_detail.CarDetailsMS.repo.CarRepo;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,7 @@ public class CarAdditionService {
 
     private Car getCarFromDTO(CarDTO carDTO){
         return new Car(carDTO.modelName(),
+                CarBrands.valueOf(carDTO.carBrand()),
                 carDTO.description(),
                 carDTO.price());
     }

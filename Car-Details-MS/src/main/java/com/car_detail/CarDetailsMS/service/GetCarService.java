@@ -37,6 +37,6 @@ public class GetCarService {
     }
 
     public static CarDTO getCarDTO(Car car){
-        return new CarDTO(car.getModelName(), car.getDescription(), car.getPrice());
+        return new CarDTO(car.getModelName(), car.getCarBrand().toString(),car.getDescription(), car.getPrice());
     }
 }
