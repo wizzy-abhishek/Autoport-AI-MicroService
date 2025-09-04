@@ -8,21 +8,23 @@
         <outputRelativeToContentRoot value="true" />
         <module name="SERVICE-REGISTRY" />
       </profile>
-      <profile name="Annotation profile for USER-ORDER-MS" enabled="true">
+      <profile name="Annotation profile for API-GATEWAY" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="USER-ORDER-MS" />
         <module name="Car-Details-MS" />
         <module name="Car-Booking-MS" />
+        <module name="USER-ORDER-MS" />
+        <module name="Api-Gateway" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Api-Gateway" options="-parameters" />
       <module name="Car-Booking-MS" options="-parameters" />
       <module name="Car-Details-MS" options="-parameters" />
       <module name="SERVICE-REGISTRY" options="-parameters" />

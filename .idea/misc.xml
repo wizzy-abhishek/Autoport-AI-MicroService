@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/SERVICE-REGISTRY/pom.xml" />
         <option value="$PROJECT_DIR$/USER-CART-MS/pom.xml" />
         <option value="$PROJECT_DIR$/USER-ORDER-MS/pom.xml" />
+        <option value="$PROJECT_DIR$/Api-Gateway/pom.xml" />
       </list>
     </option>
   </component>
