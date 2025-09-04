@@ -17,3 +17,6 @@ spring:
     url: ${HANA_URL}
     username: ${HANA_DATASOURCE_USERNAME}
     password: ${HANA_DATASOURCE_PASSWORD}
+
+jwt:
+  key: ${JWT}
