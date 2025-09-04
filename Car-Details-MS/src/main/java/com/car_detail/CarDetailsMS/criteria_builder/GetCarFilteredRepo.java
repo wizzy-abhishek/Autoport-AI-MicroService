@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,39 +22,42 @@ public class GetCarFilteredRepo {
         this.entityManager = entityManager;
     }
 
-    public List<Car> getCarsAccordingToFilter(SearchDTO searchDTO){
+    public List<Car> getCarsAccordingToFilter(SearchDTO searchDTO, String sorting, boolean ascending){
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
 
         Root<Car> root = criteriaQuery.from(Car.class);
-        List<Predicate> predicates = new ArrayList<>();
+        List<Predicate> orPredicates = new ArrayList<>();
 
-        if (searchDTO.modelName() != null && !searchDTO.modelName().isBlank()){
-            predicates
-                    .add(criteriaBuilder
-                            .like(criteriaBuilder
-                                            .lower(root.get("modelName")),
-                                    "%" + searchDTO.modelName().toLowerCase() + "%"));
+        if (searchDTO.modelName() != null && !searchDTO.modelName().isBlank()) {
+            orPredicates.add(criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("modelName")),
+                    "%" + searchDTO.modelName().toLowerCase() + "%"
+            ));
         }
 
-        if (searchDTO.brand() != null && !searchDTO.brand().isBlank()){
-            predicates
-                    .add(criteriaBuilder
-                            .like(criteriaBuilder
-                                            .lower(root.get("carBrand")),
-                                    "%" + searchDTO.brand().toLowerCase() + "%"));
+        if (searchDTO.brand() != null && !searchDTO.brand().isBlank()) {
+            orPredicates.add(criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("carBrand")),
+                    "%" + searchDTO.brand().toLowerCase() + "%"
+            ));
         }
 
-        if (searchDTO.description() != null && !searchDTO.description().isBlank()){
-            predicates
-                    .add(criteriaBuilder
-                            .like(criteriaBuilder
-                                            .lower(root.get("description")),
-                                    "%" + searchDTO.description().toLowerCase() + "%"));
+        if (searchDTO.description() != null && !searchDTO.description().isBlank()) {
+            orPredicates.add(criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("description")),
+                    "%" + searchDTO.description().toLowerCase() + "%"
+            ));
         }
 
-        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        criteriaQuery.where(criteriaBuilder.or(orPredicates.toArray(new Predicate[0])));
+
+        if(ascending){
+            criteriaQuery.orderBy(criteriaBuilder.asc(root.get(sorting)));
+        }else{
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get(sorting)));
+        }
 
         return entityManager
                 .createQuery(criteriaQuery)

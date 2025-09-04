@@ -15,19 +15,24 @@ spring:
               predicates:
                 - Path=/ai-agent/** , /auth/**
 
-            - id: HOTEL-SERVICE
-              uri: lb://HOTEL-SERVICE
+            - id: Car-Booking-MS
+              uri: lb://Car-Booking-MS
               predicates:
-                - Path=/hotel/**
+                - Path=/car-booking/**
               filters:
                 - name: AuthFilter
 
-            - id: RATING-SERVICE
-              uri: lb://RATING-SERVICE
+            - id: CAR-DETAILS-MS
+              uri: lb://CAR-DETAILS-MS
               predicates:
-                - Path=/rating/**
+                - Path=/car-detail/admin/**
               filters:
                 - name: AuthFilter
+
+            - id: CAR-DETAILS-MS-PUBLIC
+              uri: lb://CAR-DETAILS-MS
+              predicates:
+                - Path=/public/**
 
 jwtKey: ${JWT}
 

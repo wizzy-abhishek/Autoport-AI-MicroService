@@ -25,8 +25,10 @@ public class GetCarService {
 
     public Page<CarDTO> getCars(SearchDTO searchDTO,
                                 int pageNumber,
-                                Sort sort){
-        List<Car> filteredCars = getCarFilteredRepo.getCarsAccordingToFilter(searchDTO);
+                                String sortBy, boolean ascending){
+
+        Sort sort =  ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        List<Car> filteredCars = getCarFilteredRepo.getCarsAccordingToFilter(searchDTO, sortBy, ascending);
 
         List<CarDTO> carDTO = filteredCars
                 .stream()

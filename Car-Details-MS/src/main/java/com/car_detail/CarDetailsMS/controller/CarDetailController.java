@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController()
-@RequestMapping("/car-detail")
+@RequestMapping("/car-detail/admin")
 public class CarDetailController {
 
     private final CarAdditionService carDetailService;

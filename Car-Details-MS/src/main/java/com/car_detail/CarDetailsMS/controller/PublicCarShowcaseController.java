@@ -24,29 +24,20 @@ public class PublicCarShowcaseController {
                                             @RequestParam(defaultValue = "modelName") String sortBy,
                                             @RequestParam(defaultValue = "true") boolean ascending){
 
-        Sort sort =  ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         return ResponseEntity
                 .ok()
-                .body(getCarService
-                        .getCars(searchDTO,
-                                pageNumber,
-                                sort));
+                .body(getCarService.getCars(searchDTO, pageNumber, sortBy, ascending));
     }
 
-    @GetMapping("/get-car/{model-name}")
-    ResponseEntity<Page<CarDTO>> getCarByName(@PathVariable(value = "model-name") String modelName,
+    @GetMapping("/get-car/{modelName}")
+    ResponseEntity<Page<CarDTO>> getCarByName(@PathVariable(value = "modelName") String modelName,
                                                     @RequestParam(defaultValue = "0") int pageNumber,
                                                     @RequestParam(defaultValue = "modelName") String sortBy,
                                                     @RequestParam(defaultValue = "true") boolean ascending) {
-
-        Sort sort =  ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-
         return ResponseEntity
                 .ok()
                 .body(getCarService
-                        .getCars(new SearchDTO(modelName, null,null),
-                                pageNumber,
-                                sort));
+                        .getCars(new SearchDTO(modelName, modelName,modelName), pageNumber, sortBy, ascending));
     }
 
 }

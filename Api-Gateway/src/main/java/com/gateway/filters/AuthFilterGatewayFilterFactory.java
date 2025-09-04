@@ -45,7 +45,7 @@ public class AuthFilterGatewayFilterFactory extends AbstractGatewayFilterFactory
 
             exchange.getRequest()
                     .mutate()
-                    .header("X-User-Id", userId)
+                    .header("AI-User-Id", userId)
                     .build();
 
             return chain.filter(exchange);
